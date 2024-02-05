@@ -1,9 +1,11 @@
 <?php
+session_start(); // Démarrer la session
+
 // Informations de connexion à la base de données
-$serveur = 'localhost'; // Adresse du serveur MySQL
-$utilisateur = "root"; // Nom d'utilisateur MySQL
-$motDePasse = ""; // Mot de passe MySQL
-$baseDeDonnees = 'judy'; // Nom de la base de données
+$serveur = '154.56.47.52'; // Adresse du serveur MySQL
+$utilisateur = 'u139181064_judi'; // Nom d'utilisateur MySQL
+$motDePasse = 'FuturAfric2023@'; // Mot de passe MySQL
+$baseDeDonnees = 'u139181064_judi'; // Nom de la base de données
 
 try {
     // Connexion à la base de données avec PDO
@@ -32,6 +34,8 @@ try {
             // Vérifier si le mot de passe correspond
             if (password_verify($motDePasseFourni, $utilisateur['mot_de_passe'])) {
                 // Mot de passe correct, l'utilisateur est connecté
+                $_SESSION['id'] = $utilisateur['id'];
+                $_SESSION['email'] = $utilisateur['email'];
                 header("Location: index3.php");
                 exit();
             } else {

@@ -1,3 +1,18 @@
+<?php
+// Démarrer la session
+session_start();
+
+// Vérifier si l'utilisateur est connecté en vérifiant la présence de la variable de session 'id'
+if (!isset($_SESSION['id'])) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    header("Location: login.php");
+    exit();
+}
+
+// Les informations de l'utilisateur sont disponibles dans la session
+$emailUtilisateur = $_SESSION['email'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +50,7 @@
         border-radius: 20px; /* Supprimez le border-radius pour une apparence plus simple */
     }
 }
-        /* Ajoutez un style personnalisé si nécessaire */
+ /* Ajoutez un style personnalisé si nécessaire */
 /* Style pour le conteneur parent (ajuster la hauteur selon vos besoins) */
 .container-parent {
     position: relative;
@@ -45,7 +60,7 @@
 /* Style pour #myInputContainer */
 /* Style pour #myInputContainer */
 #myInputContainer {
- position: absolute;
+/* position: absolute;  */
             bottom: 0;
             width: 90%;
             max-width: 60%;
@@ -56,9 +71,6 @@
             padding: 10px;
             display: flex;
             align-items: center;
-
-          
-         
 }
 
 #con {
@@ -76,10 +88,6 @@
             padding-right: 40px; /* Espace pour l'icône */
             transition: height 0.3s; 
         }
-
-        
-
-
 
         .send-icon {
             position: absolute;
@@ -122,7 +130,7 @@
         }
 
         #chatHistory {
-    max-height: 80vh; /* Réglez la hauteur maximale à 80% de la hauteur de la fenêtre visible */
+    max-height: 75vh; /* Réglez la hauteur maximale à 80% de la hauteur de la fenêtre visible */
     overflow-y: auto; /* Activez le défilement vertical si nécessaire */
 }
 
@@ -132,9 +140,6 @@
     margin: 0;
     margin-bottom: 20px; /* Ajoutez une marge inférieure pour éviter le chevauchement avec le formulaire */
 }
-
-
-
         .user-message, .bot-message {
             padding: 10px;
             margin: 5px;
@@ -167,9 +172,42 @@
         margin: auto;
     }
 
+    .btn{
+      border: 2px solid white;
+      color: #e0e0e0;
+    }
+
+    /* Ajoutez ce style à votre feuille de style CSS ou dans la balise <style> de votre document HTML */
+#sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-unstyled.components {
+  margin-top: 20px; /* Ajoute de l'espace en haut de la liste */
+}
+
+.btn {
+  margin-top: 10px; /* Ajoute de l'espace en haut du bouton */
+}
+
+.form-check, .form-switch {
+  margin-top: 10px; /* Ajoute de l'espace en haut des éléments de formulaire */
+}
+
+.fa-sign-out-alt {
+  margin-top: 10px; /* Ajoute de l'espace en haut de l'icône de déconnexion */
+}
+
+#questionHistoryContainer {
+  margin-top: 20px; /* Ajoute de l'espace au-dessus du conteneur d'historique des questions */
+}
+
     </style>
 </head>
 <body class="d-flex flex-column h-100">
+
+
 
 <!-- toast de connexion -->
 <script>
@@ -178,48 +216,57 @@
     </script>
 
 <div class="wrapper d-flex align-items-stretch">
-    <nav id="sidebar">
-        <div class="custom-menu">
-            <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                <i class="fa fa-bars"></i>
-                <span class="sr-only">Toggle Menu</span>
-            </button>
+<nav id="sidebar">
+  <div class="custom-menu">
+    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+      <i class="fa fa-bars"></i>
+      <span class="sr-only">Toggle Menu</span>
+    </button>
+  </div>
+
+  <div class="p-4">
+    <h1><a href="index.html" class="logo" style="text-align: center;">JUDI </a></h1>
+    <ul class="list-unstyled components mb-5">
+      <li class="active">
+
+      <ul class="list-unstyled">
+    <li class="mb-2">  <?php echo $emailUtilisateur; ?></li>
+</ul>
+
+
+        <a href="index3.php"><span class="fa fa-home mr-3"></span>Accueil</a>
+
+        <button type="button" class="btn ">
+  <i class="fas fa-plus"></i> Une nouvelle session 
+</button>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="switchCouleur" onclick="changerCouleur()">
+          <label class="form-check-label" for="switchCouleur">Changer la couleur</label>
         </div>
 
-        <div class="p-4">
-            <h1><a href="index.html" class="logo" style="text-align: center;">JUDI </a></h1>
-            <ul class="list-unstyled components mb-5">
-            <li class="active">
-    <a href="index3.php"><span class="fa fa-home mr-3"></span>Accueil</a>
-
-    <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="switchCouleur" onclick="changerCouleur()">
-        <label class="form-check-label" for="switchCouleur">Changer la couleur</label>
-    </div>
-
-    
-    <!-- Switch pour activer/désactiver la lecture vocale -->
-    <div class="form-check form-switch d-flex align-items-center">
-        <input class="form-check-input" type="checkbox" id="toggleSpeech" onchange="toggleLectureVocale()">
-        <label class="form-check-label" for="toggleSpeech">Activer la lecture vocale</label>
-        <i class="fas fa-microphone micro ms-3" onclick="lireDernierMessage()" id="microIcon" style="color: white;"></i>
-    </div>
-
-    <a href="deconnexion.php" ><span class="fa fa-sign-out-alt"></span> Se déconnecter</a>
-
-    <!-- Conteneur pour l'historique des questions -->
-    <div id="questionHistoryContainer">
-        <p>Historique des Questions</p>
-        <ul id="questionHistoryList"></ul>
-    </div>
-
-    
-</li>
-
-            </ul>
+        <!-- Switch pour activer/désactiver la lecture vocale -->
+        <div class="form-check form-switch d-flex align-items-center">
+          <input class="form-check-input" type="checkbox" id="toggleSpeech" onchange="toggleLectureVocale()">
+          <label class="form-check-label" for="toggleSpeech">Activer la lecture vocale</label>
+          <i class="fas fa-microphone micro ms-3" onclick="lireDernierMessage()" id="microIcon" style="color: white;"></i>
         </div>
 
-    </nav>
+        <a href="deconnexion.php"><span class="fa fa-sign-out-alt"></span> Se déconnecter</a>
+
+        <!-- Conteneur pour l'historique des questions -->
+        <div id="questionHistoryContainer">
+          <p>Historique des Questions</p>
+          <ul id="questionHistoryList"></ul>
+        </div>
+
+        <!-- Ajout du champ de saisie avec l'icône d'addition -->
+      
+
+      </li>
+    </ul>
+  </div>
+</nav>
 
     <div id="content" class="p-4 p-md-5 pt-5">
        
@@ -240,6 +287,7 @@
             <div class="input-group">
                 <textarea class="form-control" id="con" name="content" placeholder="Votre message..." required oninput="adjustTextareaHeight(this)"></textarea>
                 <div class="input-group-append">
+                    
                     <i class="fas fa-paper-plane send-icon mr-2" onclick="sendMessage()"></i>
                     <i class="fas fa-microphone microphone-icon" onclick="recordAndTranslate()"></i>
 
@@ -262,6 +310,9 @@
 
     </div>
 </div>
+
+
+
 
 <script>
 
@@ -299,8 +350,6 @@
     recordingDuration.style.borderRadius = '5px';  // Exemple de border-radius
     recordingDuration.style.border = '2px solid green';  // Bordure de 2px solide en vert
 };
-
-
 
             recognition.onresult = (event) => {
                 const voiceText = event.results[0][0].transcript;
@@ -427,8 +476,9 @@
         appendMessage("user", "Utilisateur : " + userMessage);
 
         // Define the API URL
-        var apiUrl = 'http://127.0.0.1:8000/question/';
-
+        var apiUrl = 'https://judibot.azurewebsites.net/question/';
+         
+       
         // Get data from the form
         var role = document.getElementsByName("role")[0].value;
         var content = userMessage;
@@ -457,7 +507,7 @@
             var botResponse = await response.json();
 
             // Append the bot's response to the chat history
-            appendMessage("bot", "BOT JUDI : " + botResponse);
+            appendMessage("bot", "JUDI : " + botResponse);
 
             // Clear the input field after sending the message
             document.getElementsByName("content")[0].value = "";
