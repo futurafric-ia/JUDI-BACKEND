@@ -62,6 +62,7 @@ JuDi abréviation de « Juriste Digital », est un assistant juridique alimenté
                 <input type="text" id="form3Example1" class="form-control" name="prenom" />
             </div>
         </div>
+        
         <div class="col-md-6 mb-4">
             <div class="form-outline">
                 <label class="form-label" for="form3Example2">Nom de famille</label>
@@ -87,7 +88,7 @@ JuDi abréviation de « Juriste Digital », est un assistant juridique alimenté
         S'inscrire
     </button>
 
-    <p class="text-center" >Déjà inscrit ? <a href="login.php">Connectez-vous ici</a></p>
+    <p class="text-center" >Déjà inscrit ? <a href="index.php">Connectez-vous ici</a></p>
 
     <!-- Boutons d'inscription -->
     

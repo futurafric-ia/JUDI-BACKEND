@@ -42,7 +42,7 @@ try {
 
             // Exécuter la requête avec les valeurs fournies
             $requete->execute([$prenom, $nom, $email, $motDePasse, $dateInscription]);
-            header("Location: login.php");
+            header("Location: index.php");
             exit();
         }
     }
