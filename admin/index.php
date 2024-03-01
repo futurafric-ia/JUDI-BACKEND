@@ -44,7 +44,7 @@
     $servername = '154.56.47.52';
     $username = 'u139181064_judi';
     $password = 'FuturAfric2023@';
-    $dbname = 'FuturAfric2023@';
+    $dbname = 'u139181064_judi';
 
     // $serveur = '154.56.47.52'; // Adresse du serveur MySQL
     // $utilisateur = 'u139181064_judi'; // Nom d'utilisateur MySQL
@@ -115,10 +115,15 @@
     // $password = '';
     // $dbname = 'judy';
 
+    // $servername = '154.56.47.52';
+    // $username = 'u139181064_judi';
+    // $password = 'FuturAfric2023@';
+    // $dbname = 'FuturAfric2023@';
+
     $servername = '154.56.47.52';
     $username = 'u139181064_judi';
     $password = 'FuturAfric2023@';
-    $dbname = 'FuturAfric2023@';
+    $dbname = 'u139181064_judi';
 
     // Créer une connexion
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -214,10 +219,15 @@
 // $password = '';
 // $dbname ='judy';
 
+// $servername = '154.56.47.52';
+// $username = 'u139181064_judi';
+// $password = 'FuturAfric2023@';
+// $dbname = 'FuturAfric2023@';
+
 $servername = '154.56.47.52';
 $username = 'u139181064_judi';
 $password = 'FuturAfric2023@';
-$dbname = 'FuturAfric2023@';
+$dbname = 'u139181064_judi';
 
 // Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -295,10 +305,15 @@ $conn->close();
 // $password = '';
 // $dbname ='judy';
 
+// $servername = '154.56.47.52';
+// $username = 'u139181064_judi';
+// $password = 'FuturAfric2023@';
+// $dbname = 'FuturAfric2023@';
+
 $servername = '154.56.47.52';
 $username = 'u139181064_judi';
 $password = 'FuturAfric2023@';
-$dbname = 'FuturAfric2023@';
+$dbname = 'u139181064_judi';
 
 // Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -359,10 +374,15 @@ $conn->close();
 // $password = '';
 // $dbname ='judy';
 
+// $servername = '154.56.47.52';
+// $username = 'u139181064_judi';
+// $password = 'FuturAfric2023@';
+// $dbname = 'FuturAfric2023@';
+
 $servername = '154.56.47.52';
 $username = 'u139181064_judi';
 $password = 'FuturAfric2023@';
-$dbname = 'FuturAfric2023@';
+$dbname = 'u139181064_judi';
 // Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -426,10 +446,15 @@ $conn->close();
 // $password = '';
 // $dbname ='judy';
 
+// $servername = '154.56.47.52';
+// $username = 'u139181064_judi';
+// $password = 'FuturAfric2023@';
+// $dbname = 'FuturAfric2023@';
+
 $servername = '154.56.47.52';
 $username = 'u139181064_judi';
 $password = 'FuturAfric2023@';
-$dbname = 'FuturAfric2023@';
+$dbname = 'u139181064_judi';
 
 // Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -513,10 +538,15 @@ $conn->close();
     // $password = '';
     // $dbname = 'judy';
 
+    // $servername = '154.56.47.52';
+    // $username = 'u139181064_judi';
+    // $password = 'FuturAfric2023@';
+    // $dbname = 'FuturAfric2023@';
+
     $servername = '154.56.47.52';
     $username = 'u139181064_judi';
     $password = 'FuturAfric2023@';
-    $dbname = 'FuturAfric2023@';
+    $dbname = 'u139181064_judi';
 
     // Créer une connexion
     $conn = new mysqli($servername, $username, $password, $dbname);
