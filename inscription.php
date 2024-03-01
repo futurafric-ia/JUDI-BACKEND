@@ -21,6 +21,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
+    
     <title>JUDI</title>
 </head>
 <body style="background-color: #F5F5F5;">
