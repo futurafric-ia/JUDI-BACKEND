@@ -2,11 +2,15 @@
 // Vérifiez si l'ID de l'utilisateur à supprimer est présent dans la requête POST
 if (isset($_POST['id'])) {
     // Connexion à la base de données
+    // $servername = '154.56.47.52';
+    // $username = 'u139181064_judi';
+    // $password = 'FuturAfric2023@';
+    // $dbname ='u139181064_judi';
+
     $servername = '154.56.47.52';
     $username = 'u139181064_judi';
     $password = 'FuturAfric2023@';
-    $dbname ='FuturAfric2023@';
-
+    $dbname = 'u139181064_judi';
 //     $serveur = '154.56.47.52'; // Adresse du serveur MySQL
 // $utilisateur = 'u139181064_judi'; // Nom d'utilisateur MySQL
 // $motDePasse = 'FuturAfric2023@'; // Mot de passe MySQL

@@ -77,14 +77,14 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="col-md-6 mb-2">
             <div class="form-outline">
                 <label class="form-label" for="form3Example1">Prénom</label>
-                <input type="text" id="form3Example1" class="form-control" name="prenom" style="border-radius: 20px;"/>
+                <input type="text" id="form3Example1" class="form-control" name="prenom" style="border-radius: 20px;" required/>
             </div>
         </div>
         
         <div class="col-md-6 mb-2">
             <div class="form-outline">
                 <label class="form-label" for="form3Example2">Nom de famille</label>
-                <input type="text" id="form3Example2" class="form-control" name="nom"style="border-radius: 20px;" />
+                <input type="text" id="form3Example2" class="form-control" name="nom"style="border-radius: 20px;" required/>
             </div>
         </div>
     </div>
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Champ email -->
     <div class="form-outline mb-4">
         <label class="form-label" for="form3Example3">Adresse e-mail</label>
-        <input type="email" id="form3Example3" class="form-control" name="email" style="border-radius: 20px;"/>
+        <input type="email" id="form3Example3" class="form-control" name="email" style="border-radius: 20px;" required/>
         <?php
            if (isset($_GET['error']) && $_GET['error'] === 'missing_fields') {
        echo "<div class='text-danger'>Veuillez remplir ce champ.</div>";
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Champ mot de passe -->
     <div class="form-outline mb-4">
     <label class="form-label" for="form3Example4">Mot de passe</label>
-    <input type="password" id="form3Example4" class="form-control" name="mot_de_passe" style="border-radius: 20px;"/>
+    <input type="password" id="form3Example4" class="form-control" name="mot_de_passe" style="border-radius: 20px;" required/>
     <small id="passwordHelp" class="form-text text-danger">Le mot de passe doit comporter au moins 4 caractères.</small>
 </div>
 

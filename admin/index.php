@@ -46,10 +46,6 @@
     $password = 'FuturAfric2023@';
     $dbname = 'u139181064_judi';
 
-    // $serveur = '154.56.47.52'; // Adresse du serveur MySQL
-    // $utilisateur = 'u139181064_judi'; // Nom d'utilisateur MySQL
-    // $motDePasse = 'FuturAfric2023@'; // Mot de passe MySQL
-    // $baseDeDonnees = 'FuturAfric2023@'; // Nom de la base de données
 
     // Créer une connexion
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -60,7 +56,7 @@
     }
 
     // Requête SQL pour calculer la somme totale des notes
-    $sql_total_notes = "SELECT SUM(note) AS total_notes FROM utilisateurs WHERE note IS NOT NULL";
+    $sql_total_notes = "SELECT SUM(note) AS total_notes FROM utilisateurs WHERE note IS NOT NULL ";
     $result_total_notes = $conn->query($sql_total_notes);
 
     $total_notes = 0; // Initialisation de la somme totale des notes
@@ -213,16 +209,6 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                     <?php
-// Connexion à la base de données
-// $servername = 'localhost';
-// $username = 'root';
-// $password = '';
-// $dbname ='judy';
-
-// $servername = '154.56.47.52';
-// $username = 'u139181064_judi';
-// $password = 'FuturAfric2023@';
-// $dbname = 'FuturAfric2023@';
 
 $servername = '154.56.47.52';
 $username = 'u139181064_judi';
@@ -237,52 +223,44 @@ if ($conn->connect_error) {
     die("Échec de la connexion à la base de données : " . $conn->connect_error);
 }
 
-// Requête SQL pour obtenir le nombre total d'utilisateurs
-$sql_total_users = "SELECT COUNT(*) AS total_users FROM utilisateurs";
-$result_total_users = $conn->query($sql_total_users);
-
-$total_users = 0; // Initialisation du nombre total d'utilisateurs
-
-if ($result_total_users->num_rows > 0) {
-    // Récupérer le nombre total d'utilisateurs
-    $row_total_users = $result_total_users->fetch_assoc();
-    $total_users = $row_total_users['total_users'];
-}
-
-// Requête SQL pour obtenir le nombre d'utilisateurs ayant saisi une note
-$sql_users_with_notes = "SELECT COUNT(*) AS users_with_notes FROM utilisateurs WHERE note IS NOT NULL ";
+// Requête SQL pour obtenir le nombre total d'utilisateurs ayant saisi une note
+$sql_users_with_notes = "SELECT COUNT(*) AS users_with_notes FROM utilisateurs WHERE note IS NOT NULL";
 $result_users_with_notes = $conn->query($sql_users_with_notes);
 
-$users_with_notes = 0; // Initialisation du nombre d'utilisateurs ayant saisi une note
+$users_with_notes = 0; // Initialisation du nombre total d'utilisateurs ayant saisi une note
 
 if ($result_users_with_notes->num_rows > 0) {
-    // Récupérer le nombre d'utilisateurs ayant saisi une note
+    // Récupérer le nombre total d'utilisateurs ayant saisi une note
     $row_users_with_notes = $result_users_with_notes->fetch_assoc();
     $users_with_notes = $row_users_with_notes['users_with_notes'];
 }
 
-// Requête SQL pour obtenir le nombre d'utilisateurs ayant une note supérieure à la moyenne 3
-$sql_users_above_average = "SELECT COUNT(*) AS users_above_average FROM utilisateurs WHERE note > 2 ";
-$result_users_above_average = $conn->query($sql_users_above_average);
+// Requête SQL pour obtenir le nombre d'utilisateurs dont la note est supérieure à 2
+$sql_users_above_two = "SELECT COUNT(*) AS users_above_two FROM utilisateurs WHERE note > 2";
+$result_users_above_two = $conn->query($sql_users_above_two);
 
-$users_above_average = 0; // Initialisation du nombre d'utilisateurs ayant une note supérieure à la moyenne 3
+$users_above_two = 0; // Initialisation du nombre d'utilisateurs dont la note est supérieure à 2
 
-if ($result_users_above_average->num_rows > 0) {
-    // Récupérer le nombre d'utilisateurs ayant une note supérieure à la moyenne 3
-    $row_users_above_average = $result_users_above_average->fetch_assoc();
-    $users_above_average = $row_users_above_average['users_above_average'];
+if ($result_users_above_two->num_rows > 0) {
+    // Récupérer le nombre d'utilisateurs dont la note est supérieure à 2
+    $row_users_above_two = $result_users_above_two->fetch_assoc();
+    $users_above_two = $row_users_above_two['users_above_two'];
 }
 
-// Calcul du pourcentage
-$percentage_above_average = ($users_above_average / $users_with_notes) * 100;
+// Calcul du pourcentage des utilisateurs dont la note est supérieure à 2 par rapport au nombre total d'utilisateurs ayant saisi une note
+if ($users_with_notes > 0) {
+    $percentage_above_two = ($users_above_two / $users_with_notes) * 100;
+} else {
+    $percentage_above_two = 0; // Si aucun utilisateur n'a saisi de note, le pourcentage est défini à 0 pour éviter une division par zéro
+}
 
 // Fermer la connexion à la base de données
 $conn->close();
 ?>
 
-<!-- Affichage du pourcentage d'utilisateurs ayant une note supérieure à la moyenne 3 par rapport au nombre total d'utilisateurs ayant saisi une note dans le HTML -->
-<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pourcentage d'utilisateurs avec une note supérieure à 3 </div>
-<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo round($percentage_above_average, 3); ?>%</div>
+<!-- Affichage du pourcentage des utilisateurs dont la note est supérieure à 2 par rapport au nombre total d'utilisateurs ayant saisi une note dans le HTML -->
+<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pourcentage des utilisateurs avec une note supérieure à 2</div>
+<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo round($percentage_above_two, 2); ?>%</div>
 
                                       
                                     </div>
@@ -324,7 +302,7 @@ if ($conn->connect_error) {
 }
 
 // Requête SQL pour obtenir le nombre total d'utilisateurs
-$sql_total_users = "SELECT COUNT(*) AS total_users FROM utilisateurs";
+$sql_total_users = "SELECT COUNT(*) AS total_users FROM utilisateurs WHERE role IS NULL";
 $result_total_users = $conn->query($sql_total_users);
 
 $total_users = 0; // Initialisation du nombre total d'utilisateurs
@@ -336,7 +314,7 @@ if ($result_total_users->num_rows > 0) {
 }
 
 // Requête SQL pour obtenir le nombre d'utilisateurs ayant saisi une note
-$sql_users_with_notes = "SELECT COUNT(*) AS users_with_notes FROM utilisateurs WHERE note IS NOT NULL";
+$sql_users_with_notes = "SELECT COUNT(*) AS users_with_notes FROM utilisateurs WHERE note IS NOT NULL AND role IS NULL";
 $result_users_with_notes = $conn->query($sql_users_with_notes);
 
 $users_with_notes = 0; // Initialisation du nombre d'utilisateurs ayant saisi une note
@@ -368,17 +346,6 @@ $conn->close();
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                     <?php
-// Connexion à la base de données
-// $servername = 'localhost';
-// $username = 'root';
-// $password = '';
-// $dbname ='judy';
-
-// $servername = '154.56.47.52';
-// $username = 'u139181064_judi';
-// $password = 'FuturAfric2023@';
-// $dbname = 'FuturAfric2023@';
-
 $servername = '154.56.47.52';
 $username = 'u139181064_judi';
 $password = 'FuturAfric2023@';
@@ -392,7 +359,7 @@ if ($conn->connect_error) {
 }
 
 // Requête SQL pour obtenir le nombre total d'utilisateurs qui ont saisi une note
-$sql_users_with_notes = "SELECT COUNT(*) AS users_with_notes FROM utilisateurs WHERE note IS NOT NULL";
+$sql_users_with_notes = "SELECT COUNT(*) AS users_with_notes FROM utilisateurs WHERE note IS NOT NULL AND role IS NULL";
 $result_users_with_notes = $conn->query($sql_users_with_notes);
 
 $users_with_notes = 0; // Initialisation du nombre total d'utilisateurs ayant saisi une note
@@ -403,8 +370,8 @@ if ($result_users_with_notes->num_rows > 0) {
     $users_with_notes = $row_users_with_notes['users_with_notes'];
 }
 
-// Requête SQL pour obtenir le nombre total d'utilisateurs
-$sql_total_users = "SELECT COUNT(*) AS total_users FROM utilisateurs";
+// Requête SQL pour obtenir le nombre total d'utilisateurs ayant un rôle nul
+$sql_total_users = "SELECT COUNT(*) AS total_users FROM utilisateurs WHERE role IS NULL";
 $result_total_users = $conn->query($sql_total_users);
 
 $total_users = 0; // Initialisation du nombre total d'utilisateurs
@@ -416,7 +383,11 @@ if ($result_total_users->num_rows > 0) {
 }
 
 // Calcul du pourcentage des utilisateurs ayant saisi une note
-$percentage_users_with_notes = ($users_with_notes / $total_users) * 100;
+if ($total_users > 0) {
+    $percentage_users_with_notes = ($users_with_notes / $total_users) * 100;
+} else {
+    $percentage_users_with_notes = 0;
+}
 
 // Fermer la connexion à la base de données
 $conn->close();
@@ -425,6 +396,7 @@ $conn->close();
 <!-- Affichage du pourcentage des utilisateurs ayant saisi une note dans le HTML -->
 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pourcentage des utilisateurs ayant saisi une note</div>
 <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo round($percentage_users_with_notes, 2); ?>%</div>
+
 
                                
                                     </div>
