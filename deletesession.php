@@ -3,10 +3,15 @@
 $session_nom = $_POST['session_nom']; // Assurez-vous que vous envoyez cette valeur depuis votre page HTML ou JavaScript
 
 // Connexion à la base de données
-$serveur = 'localhost'; // Adresse du serveur MySQL
-$utilisateur = 'root'; // Nom d'utilisateur MySQL
-$motDePasse = ''; // Mot de passe MySQL
-$baseDeDonnees = 'judy'; // Nom de la base de données
+// $serveur = 'localhost'; // Adresse du serveur MySQL
+// $utilisateur = 'root'; // Nom d'utilisateur MySQL
+// $motDePasse = ''; // Mot de passe MySQL
+// $baseDeDonnees = 'judy'; // Nom de la base de données
+
+$serveur = '154.56.47.52'; // Adresse du serveur MySQL
+$utilisateur = 'u139181064_judi'; // Nom d'utilisateur MySQL
+$motDePasse = 'FuturAfric2023@'; // Mot de passe MySQL
+$baseDeDonnees = 'u139181064_judi'; // Nom de la base de données
 
 // Créer une connexion
 $conn = new mysqli($serveur, $utilisateur, $motDePasse, $baseDeDonnees);

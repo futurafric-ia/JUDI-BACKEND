@@ -7,10 +7,15 @@ if(isset($_SESSION['id'])) {
     $user_id = $_SESSION['id'];
 
     // Ici, vous devrez remplacer les valeurs de connexion à votre base de données
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $dbname ='judy';
+    $servername = '154.56.47.52';
+    $username = 'u139181064_judi';
+    $password = 'FuturAfric2023@';
+    $dbname ='u139181064_judi';
+
+// $serveur = '154.56.47.52'; // Adresse du serveur MySQL
+// $utilisateur = 'u139181064_judi'; // Nom d'utilisateur MySQL
+// $motDePasse = 'FuturAfric2023@'; // Mot de passe MySQL
+// $baseDeDonnees = 'u139181064_judi'; // Nom de la base de données
 
     // Créer une connexion à la base de données
     $conn = new mysqli($servername, $username, $password, $dbname);

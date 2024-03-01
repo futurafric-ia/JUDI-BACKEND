@@ -41,10 +41,15 @@
                                     <div class="row no-gutters align-items-center">
                                     <?php
     // Connexion à la base de données
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $dbname = 'judy';
+    $servername = '154.56.47.52';
+    $username = 'u139181064_judi';
+    $password = 'FuturAfric2023@';
+    $dbname = 'FuturAfric2023@';
+
+    // $serveur = '154.56.47.52'; // Adresse du serveur MySQL
+    // $utilisateur = 'u139181064_judi'; // Nom d'utilisateur MySQL
+    // $motDePasse = 'FuturAfric2023@'; // Mot de passe MySQL
+    // $baseDeDonnees = 'FuturAfric2023@'; // Nom de la base de données
 
     // Créer une connexion
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -105,10 +110,15 @@
                                            
                                     <?php
     // Connexion à la base de données
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $dbname = 'judy';
+    // $servername = 'localhost';
+    // $username = 'root';
+    // $password = '';
+    // $dbname = 'judy';
+
+    $servername = '154.56.47.52';
+    $username = 'u139181064_judi';
+    $password = 'FuturAfric2023@';
+    $dbname = 'FuturAfric2023@';
 
     // Créer une connexion
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -199,10 +209,15 @@
                                     <div class="row no-gutters align-items-center">
                                     <?php
 // Connexion à la base de données
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname ='judy';
+// $servername = 'localhost';
+// $username = 'root';
+// $password = '';
+// $dbname ='judy';
+
+$servername = '154.56.47.52';
+$username = 'u139181064_judi';
+$password = 'FuturAfric2023@';
+$dbname = 'FuturAfric2023@';
 
 // Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -275,10 +290,15 @@ $conn->close();
                                     <div class="row no-gutters align-items-center">
                                     <?php
 // Connexion à la base de données
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname ='judy';
+// $servername = 'localhost';
+// $username = 'root';
+// $password = '';
+// $dbname ='judy';
+
+$servername = '154.56.47.52';
+$username = 'u139181064_judi';
+$password = 'FuturAfric2023@';
+$dbname = 'FuturAfric2023@';
 
 // Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -334,11 +354,15 @@ $conn->close();
                                     <div class="row no-gutters align-items-center">
                                     <?php
 // Connexion à la base de données
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname ='judy';
+// $servername = 'localhost';
+// $username = 'root';
+// $password = '';
+// $dbname ='judy';
 
+$servername = '154.56.47.52';
+$username = 'u139181064_judi';
+$password = 'FuturAfric2023@';
+$dbname = 'FuturAfric2023@';
 // Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -397,10 +421,15 @@ $conn->close();
                                     <div class="row no-gutters align-items-center">
                                     <?php
 // Connexion à la base de données
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname ='judy';
+// $servername = 'localhost';
+// $username = 'root';
+// $password = '';
+// $dbname ='judy';
+
+$servername = '154.56.47.52';
+$username = 'u139181064_judi';
+$password = 'FuturAfric2023@';
+$dbname = 'FuturAfric2023@';
 
 // Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -479,10 +508,15 @@ $conn->close();
             <tbody>
             <?php
     // Connexion à la base de données
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $dbname = 'judy';
+    // $servername = 'localhost';
+    // $username = 'root';
+    // $password = '';
+    // $dbname = 'judy';
+
+    $servername = '154.56.47.52';
+    $username = 'u139181064_judi';
+    $password = 'FuturAfric2023@';
+    $dbname = 'FuturAfric2023@';
 
     // Créer une connexion
     $conn = new mysqli($servername, $username, $password, $dbname);
