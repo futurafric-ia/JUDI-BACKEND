@@ -2487,8 +2487,7 @@ async function sendMessage() {
     });
 
     // Ajouter le message de l'utilisateur à l'historique de la conversation
-    appendMessage("user", userMessage);'https://judibot.azurewebsites.net/question/';
-
+    appendMessage("user", userMessage);
 
     // Define the API URL
     // var apiUrl = 'http://127.0.0.1:8000/question/';
