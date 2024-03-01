@@ -2487,10 +2487,13 @@ async function sendMessage() {
     });
 
     // Ajouter le message de l'utilisateur à l'historique de la conversation
-    appendMessage("user", userMessage);
+    appendMessage("user", userMessage);'https://judibot.azurewebsites.net/question/';
+
 
     // Define the API URL
-    var apiUrl = 'http://127.0.0.1:8000/question/';
+    // var apiUrl = 'http://127.0.0.1:8000/question/';
+
+        var apiUrl = 'https://judibot.azurewebsites.net/question/';
 
     try {
         // Make an AJAX call using the fetch API
