@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="icon" href="futur.jpg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -21,33 +21,51 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-    <title>Document</title>
+    <title>JUDI</title>
 </head>
-<body>
-<script>
-    // Fonction pour afficher le toast
-    
-        toastr.error("erreure");
-    
-</script>
+<body style="background-color: #F5F5F5;">
+<style>
+/* Ajoutez votre animation CSS ici */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animated-element {
+  animation: fadeIn 1.5s ease forwards;
+}
+
+</style>
 <!-- Section: Design Block -->
 <section class="">
   <!-- Jumbotron -->
-  <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+  <div class="px-4 py-5 px-md-5 text-center text-lg-start">
     <div class="container">
       <div class="row gx-lg-5 align-items-center">
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <h1 class="my-5 display-3 fw-bold ls-tight">
-           
-            <span class="text-primary">JUDI pour résoudre vos besoins juridiques</span>
-          </h1>
-          <p style="color: hsl(217, 10%, 50.8%)">
-JuDi abréviation de « Juriste Digital », est un assistant juridique alimenté par l'IA révolutionnant l'accès aux ressources juridiques en Côte d'Ivoire et en Afrique subsaharienne. Il agit comme un expert juridique virtuel, offrant des conseils, des ressources et une assistance abordables aux particuliers, aux entreprises et aux professionnels du droit
-          </p>
-        </div>
+      <div class="col-lg-6 mb-5 mb-lg-0 animated-element">
+  <h3 class="my-5 display-3 fw-bold ls-tight">
+    <span class="text-primary">JUDI pour résoudre vos besoins juridiques</span>
+  </h3>
+  <p style="color: hsl(217, 10%, 50.8%)">
+    JUDi, l'assistant juridique alimenté par l'IA, révolutionne l'accès au droit en Afrique en offrant des conseils et des ressources abordables.
+  </p>
+</div>
+<script>
+// JavaScript pour déclencher l'animation lors du chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+  var element = document.querySelector('.animated-element');
+  element.classList.add('fadeIn');
+});
+</script>
 
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <div class="card">
+        <div class="col-lg-6 mb-5 mb-lg-0" >
+          <div class="card"style="border-radius: 20px; border: 2px solid gray;background-color: #F5F5F5;">
             <div class="card-body py-5 px-md-5">
 
 
@@ -56,17 +74,17 @@ JuDi abréviation de « Juriste Digital », est un assistant juridique alimenté
             <form method="post" action="db.php">
     <!-- 2 colonnes pour les prénoms et noms de famille -->
     <div class="row">
-        <div class="col-md-6 mb-4">
+        <div class="col-md-6 mb-2">
             <div class="form-outline">
                 <label class="form-label" for="form3Example1">Prénom</label>
-                <input type="text" id="form3Example1" class="form-control" name="prenom" />
+                <input type="text" id="form3Example1" class="form-control" name="prenom" style="border-radius: 20px;"/>
             </div>
         </div>
         
-        <div class="col-md-6 mb-4">
+        <div class="col-md-6 mb-2">
             <div class="form-outline">
                 <label class="form-label" for="form3Example2">Nom de famille</label>
-                <input type="text" id="form3Example2" class="form-control" name="nom" />
+                <input type="text" id="form3Example2" class="form-control" name="nom"style="border-radius: 20px;" />
             </div>
         </div>
     </div>
@@ -74,17 +92,61 @@ JuDi abréviation de « Juriste Digital », est un assistant juridique alimenté
     <!-- Champ email -->
     <div class="form-outline mb-4">
         <label class="form-label" for="form3Example3">Adresse e-mail</label>
-        <input type="email" id="form3Example3" class="form-control" name="email" />
+        <input type="email" id="form3Example3" class="form-control" name="email" style="border-radius: 20px;"/>
+        <?php
+           if (isset($_GET['error']) && $_GET['error'] === 'missing_fields') {
+       echo "<div class='text-danger'>Veuillez remplir ce champ.</div>";
+        } elseif (isset($_GET['error']) && $_GET['error'] === 'user_not_found') {
+      echo "<div class='text-danger'>L'email est déjà utilisé.</div>";
+      }
+?>
     </div>
 
     <!-- Champ mot de passe -->
     <div class="form-outline mb-4">
-        <label class="form-label" for="form3Example4">Mot de passe</label>
-        <input type="password" id="form3Example4" class="form-control" name="mot_de_passe" />
-    </div>
+    <label class="form-label" for="form3Example4">Mot de passe</label>
+    <input type="password" id="form3Example4" class="form-control" name="mot_de_passe" style="border-radius: 20px;"/>
+    <small id="passwordHelp" class="form-text text-danger">Le mot de passe doit comporter au moins 4 caractères.</small>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var passwordInput = document.getElementById("form3Example4");
+        var passwordHelp = document.getElementById("passwordHelp");
+
+        passwordInput.addEventListener("input", function() {
+            var password = passwordInput.value;
+            if (password.length < 4) {
+                // Si le mot de passe est inférieur à 4 caractères, afficher un message d'erreur en rouge
+                passwordHelp.textContent = "Le mot de passe doit comporter au moins 4 caractères.";
+                passwordHelp.style.color = "red"; // Couleur du texte en rouge
+            } else {
+                // Si le mot de passe est valide, afficher un message de validation en vert
+                passwordHelp.textContent = "Mot de passe valide.";
+                passwordHelp.style.color = "green"; // Couleur du texte en vert
+            }
+        });
+
+        // Empêcher l'envoi du formulaire si le mot de passe est trop court
+        var form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            var password = passwordInput.value;
+            if (password.length < 4) {
+                // Empêcher l'envoi du formulaire
+                event.preventDefault();
+                // Afficher un message d'erreur
+                passwordHelp.textContent = "Le mot de passe doit comporter au moins 4 caractères.";
+                passwordHelp.style.color = "red"; // Couleur du texte en rouge
+            }
+        });
+    });
+</script>
+
+
 
     <!-- Bouton d'envoi -->
-    <button type="submit" class="btn btn-primary btn-block mb-4">
+    <button type="submit" class="btn btn-primary btn-block mb-4"style="border-radius: 20px;">
         S'inscrire
     </button>
 

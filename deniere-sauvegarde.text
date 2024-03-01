@@ -1,0 +1,1162 @@
+<?php
+// Démarrer la session
+session_start();
+
+// Vérifier si l'utilisateur est connecté en vérifiant la présence de la variable de session 'id'
+if (!isset($_SESSION['id'])) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    header("Location: index.php");
+    exit();
+}
+
+// Les informations de l'utilisateur sont disponibles dans la session
+$emailUtilisateur = $_SESSION['email'];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Judy</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Ajoutez la référence à la bibliothèque Toastify.js -->
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+</head>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-xrknDq7VbN8ylOPL6Mo9RJlgq8FSc3SFMF+ThvvU75zDtzYSfL3vSIO4jMr0I6cgT1GYeCpoix7z2iMRcMR9zg==" crossorigin="anonymous" />
+    <style>
+      @media (max-width: 768px) {
+    #myInputContainer {
+        width: 100%; /* Pleine largeur pour les petits écrans */
+        border-radius: 20px; /* Supprimez le border-radius pour une apparence plus simple */
+    }
+}
+ /* Ajoutez un style personnalisé si nécessaire */
+/* Style pour le conteneur parent (ajuster la hauteur selon vos besoins) */
+.container-parent {
+    position: relative;
+    height: 100vh; /* 100% de la hauteur de la fenêtre */
+}
+
+/* Style pour #myInputContainer */
+/* Style pour #myInputContainer */
+/* #myInputContainer {
+
+            bottom: 0;
+            width: 90%;
+            max-width: 60%;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+} */
+
+
+
+#con {
+            /* max-height: 60px; Hauteur maximale */
+            overflow-y: auto; /* Activer le défilement vertical si nécessaire */
+            resize: none; /* Désactiver le redimensionnement manuel */
+            height: auto;
+            height: 900px; 
+            
+        }
+
+#content {
+            width: 100%;
+            box-sizing: border-box;
+            padding-right: 40px; /* Espace pour l'icône */
+            transition: height 0.3s; 
+        }
+
+        .send-icon {
+            position: absolute;
+            top: 55%;
+            right: 35px;
+            transform: translateY(-50%);
+            color: #007bff; /* Couleur de l'icône, vous pouvez la personnaliser */
+            cursor: pointer;
+        }
+
+        .microphone-icon {
+            position: absolute;
+            top: 55%;
+            right: 10px;
+            transform: translateY(-50%);
+            color: #007bff; /* Couleur de l'icône, vous pouvez la personnaliser */
+            cursor: pointer;
+        }
+
+        .micro{
+            position: absolute;
+            top: 55%;
+            right: 0px;
+            transform: translateY(-50%);
+            color: #007bff; /* Couleur de l'icône, vous pouvez la personnaliser */
+            cursor: pointer;
+        }
+
+        .chat-container {
+            max-width: 100%;
+            margin: auto;
+            padding:auto;
+        }
+
+        .chat-box {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        #chatHistory {
+    max-height: 75vh; /* Réglez la hauteur maximale à 80% de la hauteur de la fenêtre visible */
+    overflow-y: auto; /* Activez le défilement vertical si nécessaire */
+}
+
+.chat-history {
+    list-style-type: none;
+    padding: 10px;
+    margin: 0;
+    margin-bottom: 20px; /* Ajoutez une marge inférieure pour éviter le chevauchement avec le formulaire */
+}
+        .user-message, .bot-message {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .user-message {
+            background-color: #f0f0f0;
+            text-align: right;
+        }
+
+        .bot-message {
+            background-color: #e0e0e0;
+        }
+       
+
+        body {
+            transition: background-color 0.3s ease;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .sidebar {
+            transition: background-color 0.3s ease;  
+        }
+
+        a {
+        text-decoration: none;
+    }
+
+    h1 {
+        text-align: center;
+        margin: auto;
+    }
+
+    .btn{
+      border: 2px solid white;
+      color: #e0e0e0;
+    }
+
+    /* Ajoutez ce style à votre feuille de style CSS ou dans la balise <style> de votre document HTML */
+#sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-unstyled.components {
+  margin-top: 8px; /* Ajoute de l'espace en haut de la liste */
+}
+
+.btn {
+  margin-top: 8px; /* Ajoute de l'espace en haut du bouton */
+}
+
+.form-check, .form-switch {
+  margin-top: 8px; /* Ajoute de l'espace en haut des éléments de formulaire */
+
+
+.fa-sign-out-alt {
+  margin-top: 8px; /* Ajoute de l'espace en haut de l'icône de déconnexion */
+}
+
+#questionHistoryContainer {
+  margin-top: 8px; /* Ajoute de l'espace au-dessus du conteneur d'historique des questions */
+}
+
+#sessionList {
+            max-height: 300px; /* Hauteur maximale de la liste déroulante */
+            overflow-y: auto; /* Activer le défilement vertical si nécessaire */
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+
+        .user-email {
+    border: 1px solid black;
+}
+
+
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+
+<!-- toast de connexion -->
+<script>
+        // Afficher un toast lors du chargement de la page
+        toastr.success('Bienvenue sur le chatbot JUDY');
+    </script>
+
+<div class="wrapper d-flex align-items-stretch">
+<nav id="sidebar">
+  <div class="custom-menu">
+    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+      <i class="fa fa-bars"></i>
+      <span class="sr-only">Toggle Menu</span>
+    </button>
+  </div>
+
+  <div class="p-4">
+    <h1><a href="index.html" class="logo" style="text-align: center;">JUDI </a></h1>
+    <ul class="list-unstyled components mb-5">
+      <li class="active">
+
+      <ul class="list-unstyled">
+    <li class="mb-2" >  <?php echo $emailUtilisateur; ?></li>
+</ul>
+
+<button type="button" onclick="clearLocalStorage()">Vider la sauvegarde</button>
+
+        <!-- <a href="index3.php"><span class="fa fa-home mr-3"></span>Accueil</a> -->
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="switchCouleur" onclick="changerCouleur()">
+          <label class="form-check-label" for="switchCouleur">Changer la couleur</label>
+        </div>
+
+        <!-- Switch pour activer/désactiver la lecture vocale -->
+        <div class="form-check form-switch d-flex align-items-center">
+          <input class="form-check-input" type="checkbox" id="toggleSpeech" onchange="toggleLectureVocale()">
+          <label class="form-check-label" for="toggleSpeech">Activer la lecture vocale</label>
+          <i class="fas fa-microphone micro ms-3" onclick="lireDernierMessage()" id="microIcon" style="color: white;"></i>
+        </div>
+
+
+
+        <button onclick="viderChatData()" type="button" class="btn " style="border-radius: 20px;top: 10px;">
+  <i class="fas fa-plus"></i> Nouveau chatbot
+</button>
+
+<button onclick="afficherChatData()">Afficher chatData</button> 
+<button onclick="viderChatData()">Vider chatData new</button>
+<button onclick="afficherAllSession()">Afficher allsession</button>
+
+<button onclick="restaurerAllSession()">restorer</button>
+
+<button onclick="afficherContenuSession()">ajouterSession</button>
+
+<button onclick="sauvegarderSessionEnBaseDeDonnees()">ajouterSession</button>
+
+
+
+<!-- <div id="historiquechatbot">
+    <p>Historique session des bot</p>
+    <ul id="historiquechatbotList"></ul>
+</div> -->
+
+
+<script>
+
+
+
+    // Fonction pour afficher le contenu du chatData dans la console
+    function afficherChatData() {
+    var chatData = JSON.parse(localStorage.getItem("chatData"));
+    if (chatData) {
+        for (var i = 0; i < chatData.userMessages.length; i++) {
+            console.log("Utilisateur :" + chatData.userMessages[i]);
+            console.log("Assistant :" + chatData.botMessages[i]);
+        }
+    } else {
+        console.error("Aucune donnée dans le chatData.");
+    }
+}
+
+function viderChatData() {
+    ajouterSession();
+    var chatData = JSON.parse(localStorage.getItem("chatData"));
+    if (chatData) {
+        // Stocker les données de chatData dans allsession
+        localStorage.setItem("allsession", JSON.stringify(chatData));
+        console.log("Le contenu du chatData a été stocké dans allsession avec succès.");
+
+        // Supprimer le contenu de chatData
+        localStorage.removeItem("chatData");
+        console.log("Le contenu du chatData a été vidé avec succès.");
+
+        // Recharger la page pour actualiser automatiquement chatData
+        // location.reload();
+    } else {
+        console.error("Aucune donnée dans le chatData.");
+    }
+    location.reload(true);
+}
+
+/*
+Dans cette version, la fonction generateUniqueSessionNumber est appelée pour obtenir un numéro de session unique. Cette fonction vérifie d'abord si le numéro de session existe déjà dans la liste des sessions actuelles. Si c'est le cas, elle incrémente le numéro de session jusqu'à ce qu'un numéro unique soit trouvé. Ensuite, ce numéro unique est retourné pour être utilisé comme numéro de session pour la nouvelle session.
+*/
+
+function ajouterSession() {
+    var chatData = JSON.parse(localStorage.getItem("chatData"));
+    if (!chatData) {
+        // Afficher un message d'erreur
+        console.error("Impossible de créer une nouvelle session car chatData est vide.");
+        // Afficher un message à l'utilisateur, par exemple avec une alerte
+        alert("La discussion est déjà ouverte.");
+        // Arrêter l'exécution de la fonction
+        return;
+    }
+
+    // Si chatData n'est pas vide, ajoutez une nouvelle session
+    var allSessions = JSON.parse(localStorage.getItem("allSessions")) || [];
+
+    var newSessionNumber = generateUniqueSessionNumber(allSessions);
+
+    var newSession = { sessionNumber: newSessionNumber, data: chatData };
+    
+    allSessions.push(newSession);
+    localStorage.setItem("allSessions", JSON.stringify(allSessions));
+    console.log("Session ajoutée avec succès :", newSession);
+    // Mettre à jour l'affichage des sessions
+    afficherToutesSessions();
+}
+
+function generateUniqueSessionNumber(allSessions) {
+    var sessionNumber = allSessions.length + 1;
+    // Vérifier si le numéro de session existe déjà
+    while (sessionExists(allSessions, sessionNumber)) {
+        // Si le numéro existe, générer un nouveau numéro
+        sessionNumber++;
+    }
+    return sessionNumber;
+}
+
+function sessionExists(allSessions, sessionNumber) {
+    // Vérifier si le numéro de session existe déjà dans la liste des sessions
+    return allSessions.some(session => session.sessionNumber === sessionNumber);
+}
+
+
+function afficherAllSession() {
+    var allsession = JSON.parse(localStorage.getItem("allsession"));
+    var sessionName = localStorage.getItem("currentSessionName"); // Récupérer le nom de la session actuelle
+    if (allsession) {
+        console.log("Nom de la session :", sessionName); // Afficher le nom de la session
+        for (var i = 0; i < allsession.userMessages.length; i++) {
+            console.log("Utilisateur :" + allsession.userMessages[i]);
+            console.log("Assistant :" + allsession.botMessages[i]);
+        }
+    } else {
+        console.error("Aucune donnée dans le allsession.");
+    }
+}
+
+
+// --------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------
+
+
+// function afficherToutesSessions() {
+//     var allSessions = JSON.parse(localStorage.getItem("allSessions"));
+//     var sessionList = document.getElementById("sessionList");
+//     sessionList.innerHTML = "";
+
+//     if (allSessions && allSessions.length > 0) {
+//         allSessions.forEach(function(session, index) {
+//             var li = document.createElement("li");
+//             li.classList.add("session-item");
+            
+//             var deleteIcon = document.createElement("i");
+//             deleteIcon.classList.add("fas", "fa-trash", "delete-icon");
+//             deleteIcon.addEventListener("click", function() {
+//                 supprimerSession(index);
+//             });
+            
+//             li.appendChild(deleteIcon);
+            
+//             var sessionText = document.createElement("span");
+//             sessionText.textContent = "Session " + session.sessionNumber;
+//             sessionText.addEventListener("click", function() {
+//                 afficherContenuSession(session);
+//             });
+//             li.appendChild(sessionText);
+
+//             sessionList.appendChild(li);
+//         });
+//     } else {
+//         sessionList.textContent = "Aucune session disponible.";
+//         sessionList.style.color = "black";
+//     }
+// }
+
+
+function afficherToutesSessions() {
+    // Récupérer tous les noms de sessions depuis la base de données
+    $.ajax({
+        url: "sessionlistedb.php", // Remplacez ceci par l'URL de votre script PHP pour récupérer les sessions
+        type: "GET",
+        success: function(response) {
+            var sessionsFromDatabase = JSON.parse(response);
+
+            // Afficher tous les noms de sessions
+            var sessionList = document.getElementById("sessionList");
+            sessionList.innerHTML = "";
+
+            if (sessionsFromDatabase.length > 0) {
+                sessionsFromDatabase.forEach(function(session, index) {
+                    var li = document.createElement("li");
+                    li.classList.add("session-item");
+
+                    var sessionText = document.createElement("span");
+                    sessionText.textContent = "Session " + session.session_nom;
+                    sessionText.addEventListener("click", function() {
+                        afficherContenuSession(session);
+                    });
+                    li.appendChild(sessionText);
+
+                    sessionList.appendChild(li);
+                });
+            } else {
+                sessionList.textContent = "Aucune session disponible.";
+                sessionList.style.color = "black";
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Erreur lors de la récupération des sessions depuis la base de données :", error);
+        }
+    });
+}
+
+
+    // function afficherContenuSession(session) {
+    //     console.log("Contenu de la session " + session.sessionNumber + " :");
+    //     //  console.log(session.data); // Affiche le contenu de la session dans la console
+    //     // Vous pouvez également afficher chaque message individuellement
+    //     session.data.userMessages.forEach(function(userMessage, index) {
+    //         console.log("Utilisateur :", userMessage);
+    //         console.log("Assistant :", session.data.botMessages[index]);
+    //     });
+
+    //     // Mettre à jour chatData avec le contenu de la session sélectionnée
+    //     localStorage.setItem("chatData", JSON.stringify(session.data));
+    //     console.log("Le contenu de la session a été remis dans chatData avec succès.");
+
+    //     sauvegarderSessionEnBaseDeDonnees(session);    // Actualiser automatiquement la page en utilisant jQuery
+    //     location.reload(true); // Force le rechargement de la page depuis le serveur
+    // }
+
+//     function afficherContenuSession(session) {
+//     console.log("Contenu de la session " + session.sessionNumber + " :");
+//     // Afficher chaque message individuellement
+//     session.data.userMessages.forEach(function(userMessage, index) {
+//         console.log("Utilisateur :", userMessage);
+//         console.log("Assistant :", session.data.botMessages[index]);
+//     });
+
+//     // Mettre à jour chatData avec le contenu de la session sélectionnée
+//     localStorage.setItem("chatData", JSON.stringify(session.data));
+//     console.log("Le contenu de la session a été remis dans chatData avec succès.");
+
+//     // Appeler la fonction de sauvegarde en passant la session en paramètre
+//     sauvegarderSessionEnBaseDeDonnees(session);
+// }
+
+function afficherContenuSession(session) {
+    console.log("Contenu de la session " + session.sessionNumber + " :");
+    
+    // Vérifier si la session contient des données
+    if (session.data) {
+        // Afficher chaque message individuellement
+        session.data.userMessages.forEach(function(userMessage, index) {
+            console.log("Utilisateur :", userMessage);
+            console.log("Assistant :", session.data.botMessages[index]);
+        });
+
+        // Mettre à jour chatData avec le contenu de la session sélectionnée
+        localStorage.setItem("chatData", JSON.stringify(session.data));
+        console.log("Le contenu de la session a été remis dans chatData avec succès.");
+        
+        // Appeler la fonction de sauvegarde en passant la session en paramètre
+        sauvegarderSessionEnBaseDeDonnees(session);
+    } else {
+        console.log("La session ne contient pas de données.");
+    }
+}
+
+
+function sauvegarderSessionEnBaseDeDonnees(session) {
+    // Récupérer les données de la session
+    var sessionNumber = session.sessionNumber;
+    var userMessages = session.data.userMessages;
+    var botMessages = session.data.botMessages;
+    // Créer la requête SQL d'insertion
+    var query = "INSERT INTO session (session_nom,id_user,content, timestamp) VALUES (?, ?, ?, ?)";
+
+    // Exécuter la requête SQL en utilisant AJAX avec jQuery
+    $.ajax({
+        url: "sessiondb.php", // URL du script PHP d'insertion
+        type: "POST",
+        data: {
+            session_nom: sessionNumber,
+            // user_id: 1, // ID de l'utilisateur si nécessaire
+            timestamp: getCurrentTimestamp(), // Obtenir le timestamp actuel
+             content: JSON.stringify({ userMessages: userMessages, botMessages: botMessages }) // Convertir les données de la session en JSON
+
+        },
+        success: function(response) {
+            console.log("Session sauvegardée avec succès dans la base de données.");
+            // Actualiser automatiquement la page si nécessaire
+            // location.reload(true); // Force le rechargement de la page depuis le serveur
+        },
+        error: function(xhr, status, error) {
+            console.error("Erreur lors de la sauvegarde de la session dans la base de données :", error);
+        }
+    });
+}
+
+function getCurrentTimestamp() {
+    return new Date().toISOString().slice(0, 19).replace("T", " "); // Format : YYYY-MM-DD HH:MM:SS
+}
+
+
+function getCurrentTimestamp() {
+    return new Date().toISOString().slice(0, 19).replace("T", " "); // Format : YYYY-MM-DD HH:MM:SS
+}
+
+
+
+
+$(document).ready(function() {
+    // Appel de la fonction pour afficher toutes les sessions lors du chargement de la page
+    afficherToutesSessions();
+});
+
+function afficherSession(session) {
+    // Afficher le contenu de la session sélectionnée
+    console.log("Contenu de la session :", session);
+}
+ 
+function supprimerSession(index) {
+    var allSessions = JSON.parse(localStorage.getItem("allSessions"));
+    if (allSessions && allSessions.length > index) {
+        $('#confirmationModal').modal('show');
+
+        $('#confirmDelete').on('click', function() {
+            allSessions.splice(index, 1);
+            localStorage.setItem("allSessions", JSON.stringify(allSessions));
+            console.log("Session supprimée avec succès.");
+            // Mettre à jour l'affichage des sessions
+            afficherToutesSessions();
+            $('#confirmationModal').modal('hide');
+        });
+    } else {
+        console.error("Impossible de supprimer la session.");
+    }
+}
+// Appel initial pour afficher les sessions existantes
+afficherToutesSessions();
+
+</script>
+
+<style> 
+/* CSS pour la liste des sessions */
+.session-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Ajoute un espace entre chaque session */
+    cursor: pointer;
+    border: 1px solid black; /* Ajoute une bordure noire */
+    border-radius: 20px; /* Bordure arrondie */
+    padding: 10px; /* Ajoute de l'espace intérieur */
+    color: black; /* Définir la couleur du texte en noir */
+    transition: background-color 0.3s; /* Ajoute une transition pour l'animation */
+    width: 100%; /* Augmente la largeur des sessions pour occuper toute la largeur disponible */
+}
+
+.session-item:hover {
+    background-color:#000080; /* Change la couleur de fond au survol */
+}
+
+
+    #sessionList::-webkit-scrollbar {
+        width: 0; /* Masquer la barre de défilement verticale */
+    }
+
+    .delete-icon {
+        margin-right: 10px;
+        color: red;
+        cursor: pointer;
+    }
+
+    /* CSS pour le drawer */
+    .drawer-container {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Masquer le drawer initialement */
+    width: 250px;
+    height: 100%;
+    background-color: transparent; /* Rendre le drawer transparent */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    transition: right 0.3s ease; /* Animation de transition */
+    z-index: 999; /* Assurez-vous que le drawer soit au-dessus de tout autre contenu */
+    overflow-y: auto; /* Activer le défilement vertical lorsque nécessaire */
+    background-color: #F5F5F5;
+}
+
+    .drawer-content {
+        padding: 20px;
+    }
+
+    .drawer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+       /* Couleur de fond de l'en-tête */
+    }
+
+    .drawer-header h2 {
+        margin: 0;
+    }
+
+    .drawer-close-btn {
+        cursor: pointer;
+        color: #000;
+    }
+
+    .drawer-container::-webkit-scrollbar {
+    width: 0; /* Masquer la barre de défilement verticale */
+}
+  
+</style>
+
+<!-- Bouton pour ouvrir le drawer -->
+
+
+<button id="openDrawerBtn" type="button" class="btn " style="border-radius: 20px;top: 10px;">
+  <i class="fas fa-database"></i> Historique
+</button>
+
+<!-- Drawer pour afficher la liste des sessions -->
+<div class="drawer-container" id="sessionDrawer">
+    <div class="drawer-content">
+        <div class="drawer-header">
+            <h2 class="session" style="color: #000;">Liste des Historiques </h2>
+            <span class="drawer-close-btn" id="closeDrawerBtn">&times;</span>
+        </div>
+        <ul id="sessionList">
+            <!-- Ici seront listées les sessions -->
+        </ul>
+    </div>
+</div>
+
+
+
+<script>
+    // Fonction pour ouvrir ou fermer le drawer en fonction de son état actuel
+    document.getElementById("openDrawerBtn").addEventListener("click", function() {
+        var drawer = document.getElementById("sessionDrawer");
+        var drawerStyle = window.getComputedStyle(drawer); // Obtenez le style calculé du drawer
+
+        // Vérifiez si le drawer est actuellement ouvert ou fermé
+        if (drawerStyle.right === "0px") {
+            // Si le drawer est ouvert, fermez-le
+            drawer.style.right = "-250px"; // Fermer le drawer en déplaçant vers la droite
+        } else {
+            // Si le drawer est fermé, ouvrez-le
+            drawer.style.right = "0"; // Ouvrir le drawer en déplaçant vers la gauche
+        }
+    });
+
+   
+
+    // Fonction pour fermer le drawer
+    document.getElementById("closeDrawerBtn").addEventListener("click", function() {
+        document.getElementById("sessionDrawer").style.right = "-250px"; // Fermer le drawer en déplaçant vers la droite
+    });
+
+</script>
+
+
+
+<!-- <button onclick="ajouterSession()">Ajouter une session</button> -->
+
+
+
+        <a href="deconnexion.php"><span class="fa fa-sign-out-alt"></span> Se déconnecter</a>
+
+        <!-- Conteneur pour l'historique des questions -->
+        <!-- <div id="questionHistoryContainer">
+          <p>Historique des Questions</p>
+          <ul id="questionHistoryList"></ul>
+        </div> -->
+
+        <!-- Ajout du champ de saisie avec l'icône d'addition -->
+      
+
+      </li>
+    </ul>
+  </div>
+</nav>
+
+    <div id="content" class="p-4 p-md-5 pt-5">
+
+    <div class="modal" id="confirmationModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmation de suppression</h5>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûr de vouloir supprimer cette session ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="confirmDelete" style="border-radius: 20px;">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- reponse du chatbot -->
+
+        <div class="chat-container">
+            <div class="chat-box">
+                <ul class="chat-history" id="chatHistory">
+                  
+                </ul>
+                <div id="spinner" class="spinner-border text-success" style="display: none;"></div>
+
+            </div>
+
+           
+<div class="container mt-3">
+    <form method="post" id="myForm">
+        <div class="form-group" id="myInputContainer">
+            <input type="hidden" name="role" value="user">
+            <div class="input-group" >
+                <textarea  class="form-control" id="con" name="content" placeholder="Votre message..." required oninput="adjustTextareaHeight(this)"></textarea>
+
+                <div class="input-group-append">
+                    
+                    <i class="fas fa-paper-plane send-icon mr-2" onclick="sendMessage()"></i>
+                    <i class="fas fa-microphone microphone-icon" onclick="recordAndTranslate()"></i>
+
+                    <span id="recordingDuration" style="color: red;"></span>
+
+                </div>
+         
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+function clearLocalStorage() {
+    localStorage.removeItem("chatData");
+    alert("La sauvegarde a été supprimée avec succès !");
+}
+
+
+    function changerCouleur() {
+        var switchCouleur = document.getElementById('switchCouleur');
+        var couleurParDefaut = window.getComputedStyle(document.body).getPropertyValue('background-color');
+
+        if (switchCouleur.checked) {
+            document.body.style.setProperty('background-color', '#292929', 'important');
+
+        } else {
+            document.body.style.setProperty('background-color', 'white', 'important');
+        }
+    }
+
+</script>
+
+<script>
+    async function recordAndTranslate() {
+        try {
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'fr-FR'; // Language for speech recognition
+            recognition.noiseSuppression = true; // Enable noise suppression
+
+            let startTime;
+            recognition.onstart = () => {
+    startTime = Date.now();
+    const recordingDuration = document.getElementById("recordingDuration");
+    recordingDuration.textContent = 'Enregistrement en cours...';
+    recordingDuration.style.color = 'green';  // Couleur du texte en vert
+    recordingDuration.style.borderRadius = '5px';  // Exemple de border-radius
+    recordingDuration.style.border = '2px solid green';  // Bordure de 2px solide en vert
+};
+
+            recognition.onresult = (event) => {
+                const voiceText = event.results[0][0].transcript;
+                const currentText = document.getElementById("con").value;
+                document.getElementById("con").value = currentText + ' ' + voiceText;
+            };
+
+            recognition.onend = () => {
+                const endTime = Date.now();
+                const duration = (endTime - startTime) / 1000;
+                document.getElementById("recordingDuration").textContent = `Recording duration: ${duration.toFixed(2)}s`;
+                setTimeout(() => {
+                    document.getElementById("recordingDuration").textContent = '';
+                }, 2000); // Remove after 2 seconds
+            };
+
+            recognition.start();
+        } catch (error) {
+            console.error('Speech recognition error:', error);
+        }
+    }
+</script>
+
+
+
+<script>
+     function adjustTextareaHeight(element) {
+        element.style.height = 'auto';
+        element.style.height = (element.scrollHeight > 60 ? 60 : element.scrollHeight) + 'px';
+    }
+
+</script>
+
+
+<script>
+
+    // Variable de contrôle pour vérifier si une question est en cours de traitement
+    var isProcessing = false;
+
+    // Variable pour stocker la synthèse vocale
+    var synth = window.speechSynthesis;
+
+    // Variable pour la checkbox
+    var toggleSpeechCheckbox = document.getElementById("toggleSpeech");
+
+    // Variable pour l'icône du microphone
+    var microIcon = document.getElementById("microIcon");
+
+function storeQuestionHistory(question, response) {
+            var historyItem = { question: question, response: response };
+            var questionHistory = JSON.parse(localStorage.getItem("questionHistory")) || [];
+            questionHistory.push(historyItem);
+            localStorage.setItem("questionHistory", JSON.stringify(questionHistory));
+
+            // Actualiser l'affichage après chaque ajout
+            displayQuestionHistory(questionHistory);
+        }
+
+// Fonction pour ajouter une nouvelle question et réponse à l'historique
+function addQuestionToHistory(question, response) {
+    storeQuestionHistory(question, response);
+    retrieveQuestionHistory(); // Mettre à jour l'affichage
+}
+
+// Fonction pour récupérer l'historique des questions depuis le localStorage
+function retrieveQuestionHistory() {
+    var questionHistory = JSON.parse(localStorage.getItem("questionHistory")) || [];
+    displayQuestionHistory(questionHistory);
+}
+
+
+// Fonction pour afficher l'historique des questions et réponses
+function displayQuestionHistory(history) {
+    var questionHistoryList = document.getElementById("questionHistoryList");
+    questionHistoryList.innerHTML = ""; // Effacer le contenu précédent
+
+    history.forEach(item => {
+        var li = document.createElement("li");
+        li.textContent = item.question + " - " + item.response;
+        questionHistoryList.appendChild(li);
+    });
+}
+
+
+
+// Fonction pour récupérer les données du stockage local
+function retrieveFromLocalStorage() {
+    return JSON.parse(localStorage.getItem("chatData")) || { "userMessages": [], "botMessages": [] };
+}
+
+// Charger les données du stockage local lors du chargement de la page
+window.onload = function() {
+    var chatData = retrieveFromLocalStorage();
+    var userMessages = chatData.userMessages;
+    var botMessages = chatData.botMessages;
+    var maxLength = Math.max(userMessages.length, botMessages.length);
+
+    var chatHistory = document.getElementById("chatHistory");
+    var fragment = document.createDocumentFragment();
+
+    for (var i = 0; i < maxLength; i++) {
+        if (userMessages[i]) {
+            appendMessage("user", userMessages[i]);
+        }
+        if (botMessages[i]) {
+            appendMessage("bot", botMessages[i]);
+        }
+    }
+};
+
+// Fonction pour ajouter un message au stockage local
+// Fonction pour ajouter un message au stockage local
+function addToLocalStorage(message, role) {
+    var chatData = retrieveFromLocalStorage();
+    if (role === "user") {
+        if (!chatData.userMessages.includes(message)) {
+            chatData.userMessages.push(message);
+        }
+    } else if (role === "bot") {
+        if (!chatData.botMessages.includes(message)) {
+            chatData.botMessages.push(message);
+        }
+    }
+    localStorage.setItem("chatData", JSON.stringify(chatData));
+}
+
+// Fonction pour ajouter un message au chat et le sauvegarder dans le stockage local
+function appendMessage(role, message) {
+    var chatHistory = document.getElementById("chatHistory");
+    var fragment = document.createDocumentFragment();
+    var li = document.createElement("li");
+    li.className = role + "-message";
+
+    // Si le message est structuré en format de document
+    if (message.startsWith("Document:")) {
+        var paragraphs = message.split("\n");
+
+        // Parcourir chaque paragraphe du message
+        paragraphs.forEach(paragraph => {
+            var p = document.createElement("p");
+            p.textContent = paragraph.trim(); // Supprimer les espaces inutiles
+            li.appendChild(p);
+        });
+    } else { // Si le message est du texte brut
+        // Si le message est une liste numérotée
+        if (message.startsWith("1.") || message.startsWith("1)")) {
+    // Supprimer le nombre et le point ou la parenthèse de chaque élément de la liste
+    var items = message.split(/\d+\.\s*|\d+\)\s*/).filter(Boolean);
+
+    // Créer une liste numérotée
+    var ol = document.createElement("ol");
+
+    // Parcourir chaque élément de la liste
+    items.forEach(item => {
+        var liItem = document.createElement("li");
+        liItem.textContent = item.trim(); // Supprimer les espaces inutiles
+        ol.appendChild(liItem);
+    });
+
+    // Ajouter la liste numérotée au message
+    li.appendChild(ol);
+}
+ else { // Si le message est un paragraphe simple
+            var p = document.createElement("p");
+            p.textContent = message;
+            li.appendChild(p);
+        }
+    }
+
+    fragment.appendChild(li);
+    chatHistory.appendChild(fragment);
+    
+    // Ajouter le message au stockage local
+    addToLocalStorage(message, role);
+
+    if (toggleSpeechCheckbox.checked && role === 'bot') {
+        readLastMessage(message);
+    }
+    
+    // Vider la valeur de la zone de texte
+    var textarea = document.getElementById("con");
+    textarea.value = "";
+}
+
+
+
+console.log("Historique des messages :");
+    chatHistory.childNodes.forEach(node => {
+        console.log(node.textContent);
+    });
+    
+// Fonction récursive pour afficher le message progressivement
+function displayMessage(element, message, index) {
+    if (index < message.length) {
+        element.textContent += message[index];
+        index++;
+        // Utiliser requestAnimationFrame pour optimiser les performances
+        requestAnimationFrame(() => displayMessage(element, message, index));
+    }
+}
+
+// Fonction pour lire le dernier message vocal
+function readLastMessage(message) {
+    var utterance = new SpeechSynthesisUtterance(message);
+    synth.speak(utterance);
+}
+
+// Fonction pour activer/désactiver la lecture vocale
+function toggleLectureVocale() {
+    // Met à jour l'icône du microphone en fonction de l'état de la checkbox
+    if (toggleSpeechCheckbox.checked) {
+        microIcon.classList.remove("fa-microphone-slash");
+        microIcon.classList.add("fa-microphone");
+    } else {
+        microIcon.classList.remove("fa-microphone");
+        microIcon.classList.add("fa-microphone-slash");
+        
+        // Arrête la lecture vocale
+        synth.cancel();
+    }
+}
+
+
+// Reste du code inchangé...
+
+
+async function sendMessage() {
+    // Afficher le spinner pendant l'attente de la réponse
+    document.getElementById("spinner").style.display = "block";
+
+    // Désactiver le champ de saisie et le bouton pendant l'envoi de la question
+    document.getElementsByName("content")[0].disabled = true;
+    isProcessing = true;
+
+    // Récupérer le message de l'utilisateur
+    var userMessage = "Utilisateur :" + document.getElementsByName("content")[0].value;
+
+    // Append user's message to the chat history
+    appendMessage("user", userMessage);
+
+    console.log("Utilisateur (: " + userMessage);
+
+    // Define the API URL
+    var apiUrl = 'https://judibot.azurewebsites.net/question/';
+
+    // Get data from the form
+    var role = document.getElementsByName("role")[0].value;
+    var content = userMessage;
+
+    // Create an object with form data
+    var data = {
+        role: role,
+        content: content
+    };
+
+    try {
+        // Make an AJAX call using the fetch API
+        var response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify([data]),
+        });
+
+        // Réactiver le champ de saisie après la réception de la réponse
+        document.getElementsByName("content")[0].disabled = false;
+        isProcessing = false;
+
+        // Masquer le spinner une fois que la réponse est reçue
+        document.getElementById("spinner").style.display = "none";
+
+        // Update the 'response' variable with the actual bot's reply
+        var botResponse = await response.json();
+
+        // Append the bot's response to the chat history
+        appendMessage("bot",  botResponse);
+
+        console.log("reponse du bot :  " + botResponse);
+
+        // Ajouter la question de l'utilisateur et la réponse du bot à l'historique
+        addQuestionToHistory(userMessage, botResponse);
+
+        // Clear the input field after sending the message
+        document.getElementsByName("content")[0].value = "";
+    } catch (error) {
+        console.error('Error:', error);
+
+        // Réactiver le champ de saisie en cas d'erreur
+        document.getElementsByName("content")[0].disabled = false;
+        isProcessing = false;
+
+        // Masquer le spinner en cas d'erreur
+        document.getElementById("spinner").style.display = "none";
+    }
+}
+
+
+
+</script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+
+<!-- ... Previous HTML code ... -->
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

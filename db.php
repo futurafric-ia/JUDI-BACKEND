@@ -1,9 +1,15 @@
 <?php
 // Informations de connexion à la base de données
-$serveur = '154.56.47.52'; // Adresse du serveur MySQL
-$utilisateur = 'u139181064_judi'; // Nom d'utilisateur MySQL
-$motDePasse = 'FuturAfric2023@'; // Mot de passe MySQL
-$baseDeDonnees = 'u139181064_judi'; // Nom de la base de données
+// $serveur = '154.56.47.52'; // Adresse du serveur MySQL
+// $utilisateur = 'u139181064_judi'; // Nom d'utilisateur MySQL
+// $motDePasse = 'FuturAfric2023@'; // Mot de passe MySQL
+// $baseDeDonnees = 'u139181064_judi'; // Nom de la base de données
+
+
+$serveur = 'localhost'; // Adresse du serveur MySQL
+$utilisateur = 'root'; // Nom d'utilisateur MySQL
+$motDePasse = ''; // Mot de passe MySQL
+$baseDeDonnees = 'judy'; // Nom de la base de données
 
 try {
     // Connexion à la base de données avec PDO
@@ -14,7 +20,7 @@ try {
 
     // Vérifier si l'email est fourni dans le formulaire
     if (empty($_POST['email'])) {
-        echo "Erreur : L'adresse e-mail est requise.";
+        header("Location: inscription.php?error=missing_fields");
     } else {
         // Récupérer l'email du formulaire
         $email = $_POST['email'];
@@ -26,7 +32,7 @@ try {
 
         if ($nombreUtilisateurs > 0) {
             // L'email est déjà utilisé, afficher une boîte de dialogue
-           header("Location: inscription.php");
+           header("Location: inscription.php?error=user_not_found");
             exit();
         } else {
             // L'email n'est pas utilisé, procéder à l'inscription
@@ -42,7 +48,7 @@ try {
 
             // Exécuter la requête avec les valeurs fournies
             $requete->execute([$prenom, $nom, $email, $motDePasse, $dateInscription]);
-            header("Location: index.php");
+            header("Location: index3.php");
             exit();
         }
     }

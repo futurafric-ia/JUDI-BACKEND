@@ -287,40 +287,6 @@ a,
     </button>
 </div>
 
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Récupérer l'état précédent du sidebar depuis le localStorage
-    var isSidebarOpen = localStorage.getItem("sidebarOpen");
-
-    // Vérifier si le sidebar était ouvert ou fermé
-    if (isSidebarOpen === null) {
-        // Si aucune valeur n'est définie dans le localStorage, initialiser à "false"
-        isSidebarOpen = "false";
-    }
-
-    // Appliquer l'état initial du sidebar en fonction de la valeur récupérée
-    if (isSidebarOpen === "true") {
-        document.getElementById("sidebar").classList.add("active");
-    }
-
-    // Écouter les clics sur le bouton pour ouvrir ou fermer le sidebar
-    document.getElementById("sidebarCollapse").addEventListener("click", function() {
-        // Basculer l'état du sidebar (ouvert/fermé)
-        isSidebarOpen = isSidebarOpen === "true" ? "false" : "true";
-        localStorage.setItem("sidebarOpen", isSidebarOpen);
-
-        // Appliquer les changements d'affichage du sidebar en fonction de l'état mis à jour
-        if (isSidebarOpen === "true") {
-            document.getElementById("sidebar").classList.add("active");
-        } else {
-            document.getElementById("sidebar").classList.remove("active");
-        }
-    });
-});
-
-</script>
     
   <!-- <div class="custom-menu">
     <button type="button" id="sidebarCollapse" class="btn btn-primary">
@@ -330,35 +296,29 @@ a,
   </div> -->
 
   <div class="p-4">
-    <h1><a href="index.html" class="logo" style="text-align: center;color: #000;">JUDI.ia </a></h1>
+    <h1><a href="index.html" class="logo" style="text-align: center;color: #000;">JUDI </a></h1>
     <ul class="list-unstyled components mb-5">
       <li class="active">
 
       <ul class="list-unstyled">
-    <li class="mb-2 border border-dark border-2 rounded text-center">
-        <i class="bi bi-person-fill"></i> <!-- Icône Bootstrap pour représenter un utilisateur -->
-        <?php echo $emailUtilisateur; ?>
-    </li>
+    <li class="mb-2" >  <?php echo $emailUtilisateur; ?></li>
 </ul>
-
-
-
 
 <!-- <button type="button" onclick="clearLocalStorage()">Vider la sauvegarde</button> -->
 
         <!-- <a href="index3.php"><span class="fa fa-home mr-3"></span>Accueil</a> -->
-        <div class="form-check form-switch">
-    <input class="form-check-input" type="checkbox" id="switchCouleur" onclick="changerCouleur()">
-    <label class="form-check-label" for="switchCouleur">Changer la couleur</label>
-</div>
 
-<!-- Switch pour activer/désactiver la lecture vocale -->
-<div class="form-check form-switch d-flex align-items-center">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="switchCouleur" onclick="changerCouleur()">
+          <label class="form-check-label" for="switchCouleur">Changer la couleur</label>
+        </div>
+
+        <!-- Switch pour activer/désactiver la lecture vocale -->
+        <div class="form-check form-switch d-flex align-items-center">
     <input class="form-check-input" type="checkbox" id="toggleSpeech" onchange="toggleLectureVocale()">
     <label class="form-check-label" for="toggleSpeech">Activer la lecture vocale</label>
     <i class="fas fa-microphone micro ms-2" onclick="lireDernierMessage()" id="microIcon" style="color: #000;"></i>
 </div>
-
 
 
         <button onclick="viderChatData()" type="button" class="btn " style="border-radius: 20px;top: 10px;">
@@ -418,13 +378,12 @@ a,
                 </div>
 
                 <div class="modal-footer">
-                    <button style="color: #F5F5F5;" type="submit" class="btn btn-primary" id="sendRatingBtn">Envoyer</button>
+                    <button type="submit" class="btn btn-primary" id="sendRatingBtn">Envoyer</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 
 
 <script>
@@ -498,7 +457,7 @@ a,
 <!-- <button id="updateAllSessionsBtn">Mettre à jour toutes les sessions</button> -->
 
 
-<div id="sessionNomDiv"></div>
+<!-- <div id="sessionNomDiv"></div> -->
 
 <div>
     <button id="storeSessionNomBtn">Stocker Session Nom</button>
@@ -507,7 +466,7 @@ a,
 
 
 
-<!-- <button onclick="vp()">vp</button>  -->
+<!-- <button onclick=" vp()">vp</button>  -->
 
 
 <!-- <li class="session-item" data-session-id="1">Session 1</li>
@@ -849,7 +808,8 @@ function afficherContenuSession(sessionId, session_nom) {
 
             storeAndDisplaySessionNom(sessionData.session_nom);
 
-            console.log("id au clique"+sessionData.session_nom);
+            // console.log("id au clique"+sessionData.session_nom);
+
             // Vérifier si la session est définie
             if (sessionData.error) {
                 console.error("Erreur lors de la récupération de la session :", sessionData.error);
@@ -898,9 +858,9 @@ function storeAndDisplaySessionNom(session_nom) {
     sessionNomDisplay.style.color = "white"; // Modifier la couleur en blanc
     
     // Afficher le session_nom dans la console après l'avoir stocké
-    // console.log("Session Nom :", session_nom);
+    console.log("Session Nom :", session_nom);
     // Vérifier si le nom de la session est correctement stocké
-    // console.log("Session Nom dans le localStorage :", localStorage.getItem("sessionNom"));
+    console.log("Session Nom dans le localStorage :", localStorage.getItem("sessionNom"));
 }
 
 // Fonction pour stocker le contenu avant de l'afficher
@@ -935,7 +895,7 @@ setInterval(function() {
     vp();
     // Exécuter la fonction update avec session_nom
     update(session_nom);
-},500); // 1000 millisecondes = 1 seconde
+},50); // 1000 millisecondes = 1 seconde
 
  function update(session_nom) {
     
@@ -1697,7 +1657,7 @@ afficherToutesSessions();
         </ul>
       </div>
       <div class="modal-footer">
-        <button style="color: #F5F5F5;" type="button" class="btn btn-primary" onclick="subscribe()"><i class="fas fa-check-circle"></i> S'abonner</button>
+        <button type="button" class="btn btn-primary" onclick="subscribe()"><i class="fas fa-check-circle"></i> S'abonner</button>
        
       </div>
     </div>
@@ -1839,9 +1799,10 @@ afficherToutesSessions();
     }
 
 .bot-message {
-    background-color:#EAECEE;
+    background-color:#B2BABB;
     color: black;
     text-align: left;
+   
     border-radius: 20px;
     position: relative;
     margin-left: 30%;
@@ -1889,74 +1850,20 @@ afficherToutesSessions();
     top: 0;
 }
 
-.scroll-down-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1000; /* Assure que la flèche est au-dessus de tout le reste */
-}
-
-.scroll-down-button i {
-    color: #333; /* Couleur de la flèche */
-}
-
 </style> 
+
+  
+
 
         <div class="chat-container">
             
           <!-- reponse du chatbot -->
-          <div class="chat-box">
+    <div class="chat-box">
     <ul class="chat-history" id="chatHistory">
         <!-- Messages will be appended here dynamically -->
     </ul>
-    <div id="scrollDownButton" class="scroll-down-button" onclick="scrollToBottom()">
-    <i class="fas fa-angle-down"></i>
-</div>
-
     <div id="spinner" class="spinner-border text-success" style="display: none;"></div>
 </div>
-
-
-<script>
-function scrollToBottom() {
-    var chatHistory = document.getElementById("chatHistory");
-    var scrollHeight = chatHistory.scrollHeight;
-    var clientHeight = chatHistory.clientHeight;
-    var distance = scrollHeight - clientHeight;
-    var animationDuration = 500; // Durée de l'animation en millisecondes
-    var startTime = null;
-    
-    function animate(currentTime) {
-        if (startTime === null) {
-            startTime = currentTime;
-        }
-        var elapsedTime = currentTime - startTime;
-        var easeInOutCubic = easeInOut(elapsedTime, 0, 1, animationDuration);
-        chatHistory.scrollTop = distance * easeInOutCubic;
-        
-        if (elapsedTime < animationDuration) {
-            requestAnimationFrame(animate);
-        }
-    }
-    
-    function easeInOut(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t * t + b;
-        t -= 2;
-        return c / 2 * (t * t * t + 2) + b;
-    }
-    
-    requestAnimationFrame(animate);
-}
-
-
-
-</script>
 
             <style>
                 /* Appliquer la couleur noire au texte "Se déconnecter" */
@@ -2046,98 +1953,7 @@ textarea {
 
 <div class="container mt-3">
    
-<!-- HTML pour le bouton uniquement quand chatData est vide -->
-<!-- Div pour afficher le logo centré -->
-<div id="logoContainer" class="container-fluid mt-0 mb-4 text-center">
-  <h1 id="animatedText" class="animated-text"></h1>
-</div>
 
-<style>
-    .animated-text {
-  font-weight: normal; /* Initialiser le texte en gras */
-  transition: font-weight 0.5s ease; /* Ajouter une transition pour l'animation */
-}
-
-.logo-hide {
-    opacity: 0; /* Rend le logo transparent */
-    transition: opacity 0.5s ease; /* Ajoute une transition d'opacité sur 0.5 secondes */
-  }
-  </style>
-  <style>
-  /* Définition de l'animation de transition */
-  @keyframes hideAnimation {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-      height: 0;
-      padding: 0;
-    }
-  }
-
-  /* Appliquer l'animation de transition */
-  .logo-hide {
-    animation: hideAnimation 0.5s forwards;
-  }
-</style>
-
-</style>
-
-
-<!-- CSS pour masquer les boutons -->
-<script>
-  setInterval(function() {
-    var chatData = JSON.parse(localStorage.getItem("chatData"));
-    var logoContainer = document.getElementById("logoContainer");
-
-    if (chatData === null || chatData.length === 0) {
-      // Si chatData est vide, masquer le logo avec une animation de transition
-      logoContainer.classList.remove("logo-hide");
-    } else {
-      // Sinon, afficher le logo avec une animation de transition
-      logoContainer.classList.add("logo-hide");
-    }
-  },10);
-</script>
-
-
-
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function() {
-  var text = "JUDI.ia"; // Texte à afficher lettre par lettre
-  var interval = 300; // Intervalle de temps en millisecondes entre chaque lettre
-
-  // Récupérer l'élément du texte animé
-  var animatedText = document.getElementById("animatedText");
-
-  // Fonction pour afficher le texte lettre par lettre avec un intervalle de temps
-  function animateText(text, index) {
-    // Vérifier si l'index est inférieur à la longueur du texte
-    if (index < text.length) {
-      // Ajouter la lettre suivante au texte animé
-      animatedText.textContent += text.charAt(index);
-      // Appliquer le style en gras
-      animatedText.style.fontWeight = "bold";
-      // Attendre un court instant avant de réinitialiser le style en normal
-      setTimeout(function() {
-        animatedText.style.fontWeight = "bold";
-      }, interval / 2);
-      // Attendre l'intervalle spécifié avant d'afficher la prochaine lettre
-      setTimeout(function() {
-        animateText(text, index + 1); // Appel récursif pour la prochaine lettre
-      }, interval);
-    }
-  }
-
-  // Démarrer l'animation du texte au chargement de la page
-  animateText(text, 0);
-});
-
-
-</script>
 
     <form method="post" id="myForm">
         <div class="form-group" id="myInputContainer">

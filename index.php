@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<head>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,61 +28,87 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <title>Document</title>
+         <link rel="icon" href="futur.jpg" type="image/x-icon">
+    <title>JUDI</title>
 </head>
-<body>
 
-<!-- <script>
-        // Afficher un toast lors du chargement de la page
-        toastr.error('erreure de connexion');
-    </script> -->
-<!-- Section: Design Block -->
-<section class="">
-  <!-- Jumbotron -->
-<body class="px-4 py-5 px-md-5" style="background-color: hsl(0, 0%, 96%)">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<style>
+    /* Classe personnalisée pour réduire la largeur des champs */
+    .narrow-input {
+        max-width: 400px; /* Ajustez la largeur maximale selon vos besoins */
+        margin: 0 auto; /* Centre le champ horizontalement */
+       
+    }
+
+    
+    
+    .slide-in-down {
+    animation: slideInDownAnimation 1s ease-in;
+}
+
+@keyframes slideInDownAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+</style>
+
+<body style="background-color: #F5F5F5;">
+
     <div class="container">
-      <div class="row gx-lg-5 align-items-center">
-        <div class="col-lg-6 mb-5 mb-lg-0 mx-auto">
-          <div class="card">
-            <div class="card-body py-5 px-md-5">
-              <form method="post" action="db_login.php">
-                <!-- 2 colonnes pour les prénoms et noms de famille -->
-                <!-- Champ email -->
-                <h4 class="mb-4">Connexion</h4> 
-            
-                <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example3">Adresse e-mail</label>
-                    <input type="email" id="form3Example3" class="form-control" name="email" />
-                </div>
 
-                <!-- Champ mot de passe -->
-                <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example4">Mot de passe</label>
-                    <input type="password" id="form3Example4" class="form-control" name="mot_de_passe" />
-                </div>
+    <div class="text-center mt-5 slide-in-down">
+    <h1 class="text-dark font-weight-bold">JUDI</h1>
+    <h2 class="text-dark">Parlez à JUDI</h2>
+</div>
 
-                <!-- Bouton d'envoi -->
-                <button type="submit" class="btn btn-primary btn-block mb-4 w-100">
-                   Connexion
-                </button>
-
-
-                <p class="text-center">Vous n'avez pas de compte ? <a href="inscription.php">Inscrivez-vous ici</a></p>
-
-                <p class="text-center">Mot de passe oublié ? <a href="#">Réinitialisez-le ici</a></p>
-                <!-- Boutons d'inscription -->
-                
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+<form method="post" action="db_login.php" class="mt-4">
+    <div class="form-outline mb-4">
+        <input type="email" id="form3Example3" class="form-control col-md-6 col-10 mx-auto" name="email" required placeholder="Email" style="border-radius: 20px;"/>
+        <?php
+        if (isset($_GET['error']) && $_GET['error'] === 'missing_fields') {
+            echo "<div class='text-danger text-center'>Veuillez remplir ce champ.</div>";
+        } elseif (isset($_GET['error']) && $_GET['error'] === 'user_not_found') {
+            echo "<div class='text-danger text-center'>L'utilisateur n'existe pas.</div>";
+        }
+        ?>
     </div>
-  </div>
-  <!-- Jumbotron -->
-</section>
 
-<!-- Section: Design Block -->
+    <div class="form-outline mb-4">
+        <input type="password" id="form3Example4" class="form-control col-md-6 col-10 mx-auto" name="mot_de_passe" placeholder="Mot de passe" style="border-radius: 20px;"/>
+        <?php
+        if (isset($_GET['error']) && $_GET['error'] === 'missing_fields') {
+            echo "<div class='text-danger text-center'>Veuillez remplir ce champ.</div>";
+        } elseif (isset($_GET['error']) && $_GET['error'] === 'incorrect_password') {
+            echo "<div class='text-danger text-center'>Mot de passe incorrect.</div>";
+        }
+        ?>
+    </div>
 
+    <div class="text-center">
+        <button type="submit" class="btn btn-dark mt-3 mb-4"> Connexion</button>
+    </div>
+</form>
+
+            <p class="text-center">Vous n'avez pas de compte ? <a href="inscription.php">Inscrivez-vous ici</a></p>
+
+
+<!-- 
+            <p class="mt-3">OR</p>
+<button onclick="googleSignIn()" class="btn btn-light"><img src="go.png" alt="Google logo" style="height: 20px;"> Continuer avec Google</button>
+<p class="text-muted mt-5">JUDI.ai est actuellement en version bêta.</p> -->
+
+        </div>
+    </div>
 </body>
+
 </html>
