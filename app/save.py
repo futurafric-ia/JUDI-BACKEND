@@ -19,6 +19,7 @@ class Message:
         return {"role": self.role, "content": self.content}
 
 
+
 async def send_chat(message_text):
     # Convertir les objets Message en dictionnaires avant de les envoyer à OpenAI
     serialized_messages = [message.to_dict() for message in message_text]
