@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://judibot.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_3af73ca4b42d491b90b9025dd61606db }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_e8905e5b43f44a6bb6aed44626d22a77 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_677c27e8f4a04693a8d8c05c6f04c618 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_f598d07ba27f48c59a5293159cd545a6 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: judibot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_3af73ca4b42d491b90b9025dd61606db }}/judibot/:${{ github.sha }}
+        tags: judibot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_677c27e8f4a04693a8d8c05c6f04c618 }}/judibot:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'judi'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_d36c10ad315e45febcccc3ad9e084ce9 }}
-        images: 'judibot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_3af73ca4b42d491b90b9025dd61606db }}/judibot/:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_643c25db27d1423e8093ee9c74c39d43 }}
+        images: 'judibot.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_677c27e8f4a04693a8d8c05c6f04c618 }}/judibot:${{ github.sha }}'
