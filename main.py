@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.model import Message
 from app.libary import send_chat 
+from app.library_auphelia import send_chats
 
 app = FastAPI()
 
@@ -22,6 +23,10 @@ def root():
 @app.post('/question/')
 def getAnswer(message_list: list[Message]):
     return send_chat(message_list)
+
+@app.post('/auphelia/')
+def getAnswer(message_list: list[Message]):
+    return send_chats(message_list)
 
 # create an endpoint that creates a pdf file from a text
 
