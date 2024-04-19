@@ -47,7 +47,7 @@ setup_byod(deployment_id)
 
 import re
 
-def send_chats(messages: List[Message]) -> str: 
+def send_chat(messages: List[Message]) -> str: 
     message_data = [{"role": msg.role, "content": msg.content} for msg in messages]
     completion = openai.ChatCompletion.create(
         messages=message_data,
