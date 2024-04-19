@@ -24,9 +24,7 @@ def root():
 def getAnswer(message_list: list[Message]):
     return send_chat(message_list)
 
-@app.post('/auphelia/')
-def getAnswer(message_list: list[Message]):
-    return send_chat(message_list)
+
 
 # create an endpoint that creates a pdf file from a text
 
